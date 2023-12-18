@@ -9,7 +9,7 @@ import featureImg3 from "../../../assets/home/slide3.jpg";
 import featureImg4 from "../../../assets/home/slide4.jpg";
 import featureImg5 from "../../../assets/home/slide5.jpg";
 
-const FeatureFood = () => {
+const Slider_featured_food_image = () => {
     return (
         <div className="mb-10 w-3/4 mx-auto">
             <Swiper
@@ -57,4 +57,4 @@ const FeatureFood = () => {
     );
 };
 
-export default FeatureFood;
+export default Slider_featured_food_image;
