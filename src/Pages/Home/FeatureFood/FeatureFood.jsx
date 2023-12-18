@@ -11,7 +11,7 @@ import featureImg5 from "../../../assets/home/slide5.jpg";
 
 const FeatureFood = () => {
     return (
-        <div className="mb-10">
+        <div className="mb-10 w-3/4 mx-auto">
             <Swiper
                 slidesPerView={4}
                 spaceBetween={30}
