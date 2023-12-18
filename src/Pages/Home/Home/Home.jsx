@@ -1,6 +1,7 @@
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import About_our_restaurant from "../About_our_restaurant/About_our_restaurant";
 import Banner from "../Banner/Banner";
+import Contract from "../Contract/Contract";
 import FeaturedFood from "../FeaturedFood/FeaturedFood";
 
 import Slider_featured_food_image from "../Slider_featured_food_image/Slider_featured_food_image";
@@ -15,6 +16,8 @@ const Home = () => {
           <About_our_restaurant></About_our_restaurant>
           <SectionTitle heading={"from our menu"} subHeading={"check it out"}></SectionTitle>
           <FeaturedFood></FeaturedFood>
+          <Contract></Contract>
+          <SectionTitle heading={"Chef recommendation"} subHeading={"should try"}></SectionTitle>
         </div>
     );
 };
