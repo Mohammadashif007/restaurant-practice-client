@@ -6,6 +6,7 @@ import FeaturedFood from "../FeaturedFood/FeaturedFood";
 import Featured_item from "../Featured_item/Featured_item";
 
 import Slider_featured_food_image from "../Slider_featured_food_image/Slider_featured_food_image";
+import Testimonials from "../Testimonials/Testimonials";
 
 
 const Home = () => {
@@ -18,8 +19,9 @@ const Home = () => {
           <SectionTitle heading={"from our menu"} subHeading={"check it out"}></SectionTitle>
           <FeaturedFood></FeaturedFood>
           <Contract></Contract>
-          {/* <SectionTitle heading={"Chef recommendation"} subHeading={"should try"}></SectionTitle> */}
           <Featured_item></Featured_item>
+          <SectionTitle heading={"testimonials"} subHeading={"What our clients say"}></SectionTitle>
+          <Testimonials></Testimonials>
         </div>
     );
 };
