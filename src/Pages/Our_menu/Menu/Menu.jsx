@@ -1,11 +1,12 @@
 import Cover from "../../../components/Cover/Cover";
 import menuCover from "../../../assets/menu/banner3.jpg";
-import SectionTitle from "../../../components/SectionTitle/SectionTitle";
+import Menu_food from "../Menu_food/Menu_food";
+
 const Menu = () => {
     return (
         <div>
             <Cover image={menuCover} title={"our menu"}></Cover>
-            <SectionTitle subHeading={"Don't Miss"} heading={"TODAY'S OFFER"}></SectionTitle>
+            <Menu_food></Menu_food>
         </div>
     );
 };

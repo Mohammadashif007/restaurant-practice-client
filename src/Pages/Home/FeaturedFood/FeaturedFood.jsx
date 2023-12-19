@@ -1,16 +1,12 @@
-import { useEffect, useState } from "react";
 import MenuItem from "../../../components/MenuItem/MenuItem";
+import useMenu from "../../../hooks/useHooks";
 
 const FeaturedFood = () => {
-    const [menu, setMenu] = useState([]);
-
+    const [menu] = useMenu();
     const items = menu.filter((item) => item.category === "popular");
 
-    useEffect(() => {
-        fetch("menu.json")
-            .then((res) => res.json())
-            .then((data) => setMenu(data));
-    }, []);
+    
+
     return (
         <div className="my-10">
             <div className="w-3/4 mx-auto grid md:grid-cols-2 gap-5 my-10">
