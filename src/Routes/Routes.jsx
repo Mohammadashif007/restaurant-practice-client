@@ -3,7 +3,7 @@ import Main from "../Layout/Main/Main";
 import Home from "../Pages/Home/Home/Home";
 import Menu from "../Pages/Menu/Menu/Menu";
 import Order from "../Pages/Order/Order/Order";
-import Contact_us from "../Pages/Contact_us/Contact_us";
+import Login from "../Pages/Login/Login";
 
 const routes = createBrowserRouter([
     {
@@ -23,8 +23,8 @@ const routes = createBrowserRouter([
                 element: <Order></Order>,
             },
             {
-                path: "/contact_us",
-                element: <Contact_us></Contact_us>
+                path: "/login",
+                element: <Login></Login>
             }
         ],
     },
