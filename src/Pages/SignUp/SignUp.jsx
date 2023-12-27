@@ -2,16 +2,18 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
 
-    const {createUser} = useContext(AuthContext);
+    const {createUser, updateUserProfile} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const {
         register,
         handleSubmit,
         watch,
+        reset,
         formState:{errors}
     } = useForm();
     
@@ -23,6 +25,19 @@ const SignUp = () => {
         .then(result => {
             const loggedUser = result.user;
             console.log(loggedUser)
+            updateUserProfile(data.name, data.photoURL)
+            .then(() => {
+                console.log('user profile info updated')
+                reset()
+                Swal.fire({
+                    icon: "success",
+                    title: "User created successfully",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+              }).catch((error) => {
+                console.log(error.message)
+              });
             navigate('/')
         })
     }
@@ -68,6 +83,18 @@ const SignUp = () => {
                             />
                             <p>{errors.email?.message}</p>
                             <p>{email}</p>
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Photo URL</span>
+                            </label>
+                            <input
+                                type="text"
+                                {...register("photo", { required: "Photo URL field is required" })}
+                                placeholder="Photo URL"
+                                className="input input-bordered"
+                            />
+                            <p>{errors.photo?.message}</p>
                         </div>
                         <div className="form-control">
                             <label className="label">
