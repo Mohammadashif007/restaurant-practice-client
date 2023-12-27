@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
     loadCaptchaEnginge,
     LoadCanvasTemplate,
@@ -6,9 +6,9 @@ import {
 } from "react-simple-captcha";
 import { AuthContext } from "../../provider/AuthProvider";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
-    const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
     const {signInUser} = useContext(AuthContext);
 
@@ -27,6 +27,12 @@ const Login = () => {
         .then(result => {
             const user = result.user;
             console.log(user)
+            Swal.fire({
+                icon: "success",
+                title: "Login successful!",
+                showConfirmButton: false,
+                timer: 1500
+              });
         })
         .catch(error => {
             const errorMessage = error.message;
@@ -35,8 +41,8 @@ const Login = () => {
         
     };
 
-    const handleValidateCaptcha = () => {
-        const user_captcha_value = captchaRef.current.value;
+    const handleValidateCaptcha = (e) => {
+        const user_captcha_value = e.target.value;
         if(validateCaptcha(user_captcha_value)){
             setDisabled(false);
         }
@@ -96,12 +102,11 @@ const Login = () => {
                             <input
                                 type="text"
                                 name="captcha"
-                                ref={captchaRef}
+                                onBlur={handleValidateCaptcha}
                                 placeholder="Type Captcha"
                                 className="input input-bordered mt-3"
                                 required
                             />
-                            <button onClick={handleValidateCaptcha}  className="btn btn-xs bg-black text-white mt-3">Validate</button>
                         </div>
                         <div className="form-control mt-6">
                             <button disabled={disabled}  className="btn btn-primary">Login</button>

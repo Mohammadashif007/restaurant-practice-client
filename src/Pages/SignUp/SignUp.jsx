@@ -1,7 +1,13 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const SignUp = () => {
+
+    const {createUser} = useContext(AuthContext);
+    const navigate = useNavigate();
+
     const {
         register,
         handleSubmit,
@@ -10,8 +16,18 @@ const SignUp = () => {
     } = useForm();
     
     const email = watch('email');
-    console.log(errors)
 
+    const onSubmit = data => {
+        console.log(data)
+        createUser(data.email, data.password)
+        .then(result => {
+            const loggedUser = result.user;
+            console.log(loggedUser)
+            navigate('/')
+        })
+    }
+
+  
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -25,9 +41,7 @@ const SignUp = () => {
                 </div>
                 <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <form
-                        onSubmit={handleSubmit((data) => {
-                            console.log(data)
-                        })}
+                        onSubmit={handleSubmit(onSubmit)}
                         className="card-body"
                     >
                         <div className="form-control">

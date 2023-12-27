@@ -1,23 +1,41 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../provider/AuthProvider";
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+        .then(() => {})
+        .then((err) => {
+            console.log(err.message)
+        })
+    }
+
     const navLink = (
         <>
-            
-                <li>
-                   <Link to='/'>Home</Link> 
-                </li>
-                <li>
-                   <Link to='/menu'>Our Menu</Link> 
-                </li>
-                <li>
-                   <Link to='/order/dessert'>Order Food</Link> 
-                </li>
-                <li>
-                   <Link to='/login'>Login</Link> 
-                </li>
-             
-            
+            <li>
+                <Link to="/">Home</Link>
+            </li>
+            <li>
+                <Link to="/menu">Our Menu</Link>
+            </li>
+            <li>
+                <Link to="/order/dessert">Order Food</Link>
+            </li>
+
+            {user ? (
+                <>
+                    <button onClick={handleLogOut} className="">LOGOUT</button>
+                </>
+            ) : (
+                <>
+                    <li>
+                        <Link to="/login">Login</Link>
+                    </li>
+                </>
+            )}
         </>
     );
 
@@ -49,15 +67,13 @@ const Navbar = () => {
                         tabIndex={0}
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                     >
-                     {navLink}
+                        {navLink}
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-xl">Foodies</a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
-                   {navLink}
-                </ul>
+                <ul className="menu menu-horizontal px-1">{navLink}</ul>
             </div>
             <div className="navbar-end">
                 <a className="btn">Button</a>
