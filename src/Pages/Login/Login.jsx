@@ -14,8 +14,8 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // const from = location.state?.from?.pathname || "/";
-    let from = location.state?.from?.pathname || "/";
+    const from = location.state?.from?.pathname || "/";
+   
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -31,14 +31,14 @@ const Login = () => {
         signInUser(email, password)
         .then(result => {
             const user = result.user;
-            console.log(user)
+            navigate(from, {replace: true});
             Swal.fire({
                 icon: "success",
                 title: "Login successful!",
                 showConfirmButton: false,
                 timer: 1500
               });
-              navigate(from, { replace: true });
+              navigate(from,  { replace: true })
         })
         .catch(error => {
             const errorMessage = error.message;
@@ -111,11 +111,11 @@ const Login = () => {
                                 onBlur={handleValidateCaptcha}
                                 placeholder="Type Captcha"
                                 className="input input-bordered mt-3"
-                                required
+                                
                             />
                         </div>
                         <div className="form-control mt-6">
-                            <button disabled={disabled}  className="btn btn-primary">Login</button>
+                            <button disabled={false}  className="btn btn-primary">Login</button>
                         </div>
                     </form>
                     <small className="p-4">New here ? Please <Link to="/signup">create an account</Link></small>
