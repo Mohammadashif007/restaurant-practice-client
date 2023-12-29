@@ -1,17 +1,18 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthProvider";
+import { IoCart } from "react-icons/io5";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
 
     const handleLogOut = () => {
         logOut()
-        .then(() => {})
-        .then((err) => {
-            console.log(err.message)
-        })
-    }
+            .then(() => {})
+            .then((err) => {
+                console.log(err.message);
+            });
+    };
 
     const navLink = (
         <>
@@ -27,11 +28,21 @@ const Navbar = () => {
             <li>
                 <Link to="/secret">Secret</Link>
             </li>
+            <li>
+                <Link to="/">
+                    <button className="flex gap-1 items-center">
+                        <IoCart className="text-2xl"/>
+                        <div className="badge badge-secondary">+0</div>
+                    </button>
+                </Link>
+            </li>
 
             {user ? (
                 <>
-                    <p>{user?.displayName}</p>
-                    <button onClick={handleLogOut} className="">LOGOUT</button>
+                    {/* <p>{user?.displayName}</p> */}
+                    <button onClick={handleLogOut} className="">
+                        LOGOUT
+                    </button>
                 </>
             ) : (
                 <>
