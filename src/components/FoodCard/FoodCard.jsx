@@ -1,34 +1,56 @@
-import Swal from "sweetalert2";
-import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useCart from "../../hooks/useCart";
+
 
 const FoodCard = ({ item }) => {
-    const { image, price, name, recipe } = item;
+    const { image, price, name, recipe, _id } = item;
     const navigate = useNavigate();
-    const location = useLocation();
-    // const {user} = useContext(AuthContext);
-    const auth = useAuth();
-    const { user } = auth;
+    const {user} = useAuth();
+    const location = useLocation(); 
+    const axiosSecure = useAxiosSecure(); 
+    const [,refetch] = useCart();
 
-    const handleAddToCart = (food) => {
-        console.log(food);
-        if (user && user?.email) {
-            // cart send to the db
-        } else {
+    const handleAddToCart = () => {
+        if(user && user?.email){
+            const cartItem = {
+                menuId: _id,
+                email : user.email,
+                name,
+                image, price
+            }
+
+            axiosSecure.post('/carts', cartItem)
+            .then(res => {
+                if(res.data.insertedId){
+                    Swal.fire({
+                        icon: "success",
+                        title: `${name} added to the cart`,
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                      refetch();
+                }
+            })
+        }
+        else{
             Swal.fire({
-                title: "You are not logged in",
+                title: "Please, logged in",
                 text: "Please login to add to the cart",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
-                confirmButtonText: "Go To login!",
-            }).then((result) => {
+                confirmButtonText: "Login"
+              }).then((result) => {
                 if (result.isConfirmed) {
-                    navigate("/login", { state: { from: location } });
+                  navigate('/login', {state:{from:location}})
                 }
-            });
+              });
         }
+          
     };
 
     return (
@@ -44,7 +66,7 @@ const FoodCard = ({ item }) => {
                 <p>{recipe}</p>
                 <div className="card-actions">
                     <button
-                        onClick={() => handleAddToCart(item)}
+                        onClick={handleAddToCart}
                         className="btn btn-outline border-b-4 text-[#BB8506]"
                     >
                         Add To Cart
