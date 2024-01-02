@@ -11,6 +11,7 @@ const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [cart] = useCart();
     
+    
 
     
     
@@ -38,7 +39,7 @@ const Navbar = () => {
                 <Link to="/secret">Secret</Link>
             </li>
             <li>
-                <Link to="/">
+                <Link to="/dashboard/cart">
                     <button className="flex gap-1 items-center">
                         <IoCart className="text-2xl"/>
                         <div className="badge badge-secondary">+{cart.length}</div>

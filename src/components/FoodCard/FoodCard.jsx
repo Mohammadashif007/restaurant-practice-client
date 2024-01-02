@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
+// import useCart from "../../hooks/useCart";
 
 
 const FoodCard = ({ item }) => {
@@ -11,7 +12,8 @@ const FoodCard = ({ item }) => {
     const {user} = useAuth();
     const location = useLocation(); 
     const axiosSecure = useAxiosSecure(); 
-    const [,refetch] = useCart();
+    // const [,refetch] = useCart();
+    const [, refetch] = useCart();
 
     const handleAddToCart = () => {
         if(user && user?.email){
@@ -31,7 +33,8 @@ const FoodCard = ({ item }) => {
                         showConfirmButton: false,
                         timer: 1500
                       });
-                      refetch();
+                    //   refetch();
+                    refetch();
                 }
             })
         }
